@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+  application:
+    name: FLIGHT-API-GATEWAY
+    
+server:
+  port: 8089
+  
+zuul:
+  routes:
+    startpage:
+     path: /**
+     url: http://localhost:8089
+    FLIGHT-MS:
+     path: /api/**
