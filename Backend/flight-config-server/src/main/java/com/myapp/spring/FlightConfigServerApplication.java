@@ -7,6 +7,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @SpringBootApplication
 @EnableConfigServer
 public class FlightConfigServerApplication {
+//hi
 
 	public static void main(String[] args) {
 		SpringApplication.run(FlightConfigServerApplication.class, args);
