@@ -1,50 +1,57 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 class Number extends Component {
-   
     constructor(props) {
-        super(props);
+        super();
         this.state = {
-            flightNo: '',
+            flightNo:''
         }
+    }
+
+    displayTable(){
+        let { flights } = this.props;
+        // console.log(flights.flightNo)
+        return (
+            <tr>
+                <td>{flights.flightNo}</td>
+                <td>{flights.flightType}</td>
+                <td>{flights.sourceCity}</td>
+                <td>{flights.destinationCity}</td>
+                <td>{flights.departureTime}</td>
+                <td>{flights.arrivalTime}</td>
+                <td>{flights.fare}</td>
+                <td><Link to={`/book/${flights.flightNo}`} param={{ flightNo: flights.flightNo }}><button className="btn btn-warning">Book</button></Link></td>
+            </tr>
+
+        )
 
     }
+
 
     showTable() {
         let { flights } = this.props;
         console.log(flights)
         return (
             <div className="col-12">
-                <table className="table table-dark">
-                    <tr>
-                        <th scope="col">Flight Number</th>
-                        <td>{flights.flightNo}</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Flight Type</th>
-                        <td>{flights.flightType}</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Source City</th>
-                        <td>{flights.sourceCity}</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Destination City</th>
-                        <td>{flights.destinationCity}</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Departure Time</th>
-                        <td>{flights.departureTime}</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Arrival Time</th>
-                        <td>{flights.arrivalTime}</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Fare</th>
-                        <td>{flights.fare}</td>
-                    </tr>
-                </table>
+                 <table className="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">Flight Number</th>
+                                <th scope="col">Flight Type</th>
+                                <th scope="col">Source City</th>
+                                <th scope="col">Destination City</th>
+                                <th scope="col">Departure Time</th>
+                                <th scope="col">Arrival Time</th>
+                                <th scope="col">Fare</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.displayTable()}
+                        </tbody>
+                    </table>
             </div>
 
         )
@@ -76,7 +83,7 @@ class Number extends Component {
                     </div>
                     <hr />
                     <div className="form-group">
-                        <button className="btn btn-danger">Search</button>
+                        <button className="btn btn-danger"><i class="fa fa-search">&nbsp;</i>Search</button>
                     </div>
                 </form>
             </div>

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 class Place extends Component {
     constructor(props) {
@@ -24,6 +26,7 @@ class Place extends Component {
                     <td>{item.departureTime}</td>
                     <td>{item.arrivalTime}</td>
                     <td>{item.fare}</td>
+                    <td><Link to={`/book/${item.flightNo}`} param={{ flightNo: item.flightNo }}><button className="btn btn-warning">Book</button></Link></td>
                 </tr>
 
             )
@@ -94,16 +97,16 @@ class Place extends Component {
                     <div className="col-6">
                         <form onSubmit={(e) => { this.submitFunction(e) }}>
                             <div className="form-group">
-                                <label>From</label>
+                                <label>From &nbsp;<i class="fa fa-arrow-circle-right"></i></label>
                                 <input type="text" className="form-control" id="sourceCity" onChange={(e) => { this.handleChange(e) }} />
                             </div>
                             <div className="form-group">
-                                <label>To</label>
+                                <label>To &nbsp;<i class="fa fa-arrow-circle-left"></i></label>
                                 <input type="text" className="form-control" id="destinationCity" onChange={(e) => { this.handleChange(e) }} />
                             </div>
                             <hr />
                             <div className="form-group">
-                                <button className="btn btn-info">Search</button>
+                                <button className="btn btn-info"><i class="fa fa-search">&nbsp;</i>Search</button>
                             </div>
                         </form>
                     </div>
