@@ -1,7 +1,8 @@
-import React from 'react';
-import './home.css';
 
-export default()=>(
+import './home.css';
+import React, { Component } from 'react';
+
+export default () => (
     <div className="jumbotron">
     <h1 className="display-3"><b>Welcome!</b></h1>
     <hr className="my-4" />
@@ -11,4 +12,5 @@ export default()=>(
    </p>
    </h3>
 </div>
+
 );

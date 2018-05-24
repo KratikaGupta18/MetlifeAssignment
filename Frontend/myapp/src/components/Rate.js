@@ -69,7 +69,7 @@ class Rate extends Component {
 
                         </div>
                         <div className="help-block">
-                                    {this.state.stars > 5 ? 'Rate out of 5' : ''}
+                                    {(this.state.stars > 5||this.state.stars<0) ? 'Rate out of 5' : ''}
                                 </div>
                         <button disabled={this.state.stars > 5} className="btn btn-secondary">Rate</button>
                     </form>

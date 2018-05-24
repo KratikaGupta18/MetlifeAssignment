@@ -88,7 +88,7 @@ class App extends Component {
     
     return (
       <div className="container-fluid">
-        <nav className="navbar navbar-light fill" style={{ "backgroundColor": "#e3f2fd" }}>
+        <nav className="navbar navbar-light fill">
           <Link className="navbar-brand" to="/"><b style={{ "fontSize": "40px" }}>Flight Booking Portal</b></Link>
           <p><i>Instant Flight Booking Service....</i></p>
         </nav>
@@ -96,7 +96,7 @@ class App extends Component {
         
           <div className="row">
           <div className="col-3 col-sm-3 col-3">
-            <nav className="navbar navbar-dark bg-light navbar-justified">
+            <nav className="navbar navbar-dark bg-light navbar-justified section">
               <ul className="nav mr-auto">
               <li className="nav-item">
                   <Link className="nav-link" to="/about"><i className="fa fa-info-circle">&nbsp;</i>About Us</Link>

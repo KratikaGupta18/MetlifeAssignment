@@ -90,7 +90,7 @@ class Book extends Component {
                                 </tr>
                                 <tr>
                                     <th scope="col">Fare</th>
-                                    <td>{flight.fare}</td>
+                                    <td>&#8377;{flight.fare}</td>
                                 </tr>
                                 <tr>
                                     <td><button className="btn btn-danger" onClick={() => { this.confirmHandler() }}>Confirm</button></td>

@@ -2,4 +2,14 @@
     background-image: url("2.jpg") ;
     background-repeat: no-repeat;
     background-size: cover;
+    animation: animmate 7s reverse;
 }
+
+@keyframes animmate {
+    from {
+        transform: translateY(0%);
+    }
+    to {
+        transform: translate(100%)
+    }
+  }

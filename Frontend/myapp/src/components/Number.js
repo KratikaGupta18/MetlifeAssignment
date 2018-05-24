@@ -21,7 +21,7 @@ class Number extends Component {
                 <td>{flights.destinationCity}</td>
                 <td>{flights.departureTime}</td>
                 <td>{flights.arrivalTime}</td>
-                <td>{flights.fare}</td>
+                <td>&#8377;{flights.fare}</td>
                 <td><Link to={`/book/${flights.flightNo}`} param={{ flightNo: flights.flightNo }}><button className="btn btn-warning">Book</button></Link></td>
             </tr>
 

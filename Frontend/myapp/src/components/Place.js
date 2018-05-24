@@ -25,7 +25,7 @@ class Place extends Component {
                     <td>{item.destinationCity}</td>
                     <td>{item.departureTime}</td>
                     <td>{item.arrivalTime}</td>
-                    <td>{item.fare}</td>
+                    <td>&#8377;{item.fare}</td>
                     <td><Link to={`/book/${item.flightNo}`} param={{ flightNo: item.flightNo }}><button className="btn btn-warning">Book</button></Link></td>
                 </tr>
 
