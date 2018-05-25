@@ -2,7 +2,7 @@
     background-image: url("2.jpg") ;
     background-repeat: no-repeat;
     background-size: cover;
-    animation: animmate 7s reverse;
+    animation: animmate 3s reverse;
 }
 
 @keyframes animmate {

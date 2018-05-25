@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
-class Place extends Component {
+class SearchByPlace extends Component {
     constructor(props) {
         super();
         this.state = {
@@ -36,6 +36,7 @@ class Place extends Component {
 
     renderTable() {
         let { flights } = this.props;
+        if(flights.length!==0){
         return (
             <div>
                 <div>
@@ -60,6 +61,20 @@ class Place extends Component {
 
             </div>
         )
+    }else {
+        return (
+            <div>
+                <div class="alert alert-danger">
+                    <strong>Sorry!</strong>
+                    <hr />
+                    <h2> No such flight found!</h2>
+                    <br />
+
+                </div>
+            </div>
+        )
+    }
+
     }
 
     handleChange(e) {
@@ -117,4 +132,4 @@ class Place extends Component {
     }
 }
 
-export default Place;
+export default SearchByPlace;

@@ -4,8 +4,8 @@ import './App.css';
 import { Route, Router, BrowserRouter, withRouter, Link } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
-import Place from './components/Place';
-import Number from './components/Number';
+import SearchByPlace from './components/SearchByPlace';
+import SearchByNumber from './components/SearchByNumber';
 import Rate from './components/Rate';
 import Book from './components/Book';
 import 'font-awesome/css/font-awesome.css';
@@ -18,6 +18,7 @@ class App extends Component {
       flights:[],
       isShowTable:false,
       isDisplayTable:false,
+      
       rate:[
         {stars:5}
       ]
@@ -47,7 +48,8 @@ class App extends Component {
         .then(flights => {
             this.setState({flights});
             this.setState({isDisplayTable:true});
-            console.log(flights);
+            
+            console.log(flights.status);
         });
   }
 
@@ -67,6 +69,7 @@ class App extends Component {
         .then(flights => {
             this.setState({ flights });
             this.setState({isShowTable:true});
+            this.setState({valuePresent:true});
             console.log(flights);
         });
   }
@@ -116,8 +119,8 @@ class App extends Component {
           <div className="col-9 col-sm-9 col-9">
           <Route exact path="/" component={Home}  />
           <Route path="/about" component={About} />
-          <Route path="/place" render={(props)=><Place {...props} flights={flights} isTable={isTable} onSubmit={(sourceCity,destinationCity)=>this.handleSubmit(sourceCity,destinationCity)}/>}  />
-          <Route path="/number" render={(props)=><Number {...props} flights={flights} isDisplayTable={isDisplayTable} onSubmit={(flightNo)=>this.handleSubmitFlightNumber(flightNo)}/>}/>
+          <Route path="/place" render={(props)=><SearchByPlace {...props} flights={flights} isTable={isTable} onSubmit={(sourceCity,destinationCity)=>this.handleSubmit(sourceCity,destinationCity)}/>}  />
+          <Route path="/number" render={(props)=><SearchByNumber {...props} flights={flights} isDisplayTable={isDisplayTable} onSubmit={(flightNo)=>this.handleSubmitFlightNumber(flightNo)}/>}/>
           <Route path="/rate"  render={(props)=><Rate {...props} rate={rate} onRate={(newStars)=>{this.handleRate(newStars)}}/>} />
          <Route path="/book/:flightNo" render={(props)=><Book {...props} flights={flights}/>}/>
           </div>

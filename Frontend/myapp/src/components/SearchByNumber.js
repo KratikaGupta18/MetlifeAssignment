@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
-class Number extends Component {
+class SearchByNumber extends Component {
     constructor(props) {
         super();
         this.state = {
-            flightNo:''
+            flightNo: ''
         }
     }
 
-    displayTable(){
+    displayTable() {
         let { flights } = this.props;
         // console.log(flights.flightNo)
         return (
@@ -32,10 +32,11 @@ class Number extends Component {
 
     showTable() {
         let { flights } = this.props;
-        console.log(flights)
-        return (
-            <div className="col-12">
-                 <table className="table table-dark">
+
+        if (flights.status !== 500) {
+            return (
+                <div className="col-12">
+                    <table className="table table-dark">
                         <thead>
                             <tr>
                                 <th scope="col">Flight Number</th>
@@ -45,16 +46,30 @@ class Number extends Component {
                                 <th scope="col">Departure Time</th>
                                 <th scope="col">Arrival Time</th>
                                 <th scope="col">Fare</th>
-                               
+
                             </tr>
                         </thead>
                         <tbody>
                             {this.displayTable()}
                         </tbody>
                     </table>
-            </div>
+                </div>
 
-        )
+            )
+        }
+        else {
+            return (
+                <div>
+                    <div class="alert alert-danger">
+                        <strong>Sorry!</strong>
+                        <hr />
+                        <h2> No such flight found!</h2>
+                        <br />
+
+                    </div>
+                </div>
+            )
+        }
     }
     handleChange(e) {
         let value = e.target.value;
@@ -110,4 +125,4 @@ class Number extends Component {
     }
 }
 
-export default Number;
+export default SearchByNumber;

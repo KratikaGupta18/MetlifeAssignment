@@ -60,11 +60,11 @@
 }
 
 .section {
-  animation: section-spin 7s linear;
+  animation: section-spin 3s linear;
 
 }
 @keyframes section-spin {
-  from { transform: rotate(0deg); }
+  from { transform: rotate(300deg); }
   to { transform: rotate(360deg); }
 }
 

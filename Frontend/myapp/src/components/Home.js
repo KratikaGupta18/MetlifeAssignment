@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 export default () => (
     <div className="jumbotron">
     <h1 className="display-3"><b>Welcome!</b></h1>
-    <hr className="my-4" />
+    <br/>
    <h3>
    <p className="badge badge-dark display-5">
     <b>Go Ahead, Help us serve you!!</b>
