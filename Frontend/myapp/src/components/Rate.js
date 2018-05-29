@@ -6,15 +6,12 @@ class Rate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false,
+           
             stars: 5,
-            name:''
+            name:'',
         };
     }
-    toggleForm() {
-        let { isOpen } = this.state;
-        this.setState({ isOpen: !isOpen, stars: 5 });
-    }
+ 
     handleChange(e) {
         let feild=e.target.id;
         let value = e.target.value;
@@ -30,24 +27,11 @@ class Rate extends Component {
         };
         console.log(newStars)
         this.props.onRate(newStars);
-        this.toggleForm();
-
     }
-
-    renderRating() {
-        let { rate } = this.props;
-        return rate.map((rate, idx) => {
-            return <Stars key={idx} rate={rate} />
-        });
-    }
-
     render() {
         let n = this.state.stars;
         return (
             <div>
-            <div>
-                {this.renderRating()}
-            </div>
             <div className="card bg-info text-white col-6">
                 <div className="card-header"><b>Rate us</b></div>
                 <div className="card-body">

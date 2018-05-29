@@ -7,8 +7,10 @@ import About from './components/About';
 import SearchByPlace from './components/SearchByPlace';
 import SearchByNumber from './components/SearchByNumber';
 import Rate from './components/Rate';
-import Book from './components/Book';
+import BookFlight from './components/BookFlight';
 import 'font-awesome/css/font-awesome.css';
+import Stars from './components/Stars';
+import ViewBookedFlights from './components/ViewBookedFlights';
 
 
 class App extends Component {
@@ -19,23 +21,45 @@ class App extends Component {
       isShowTable:false,
       isDisplayTable:false,
       
-      rate:[
-        {stars:5}
-      ]
+      rate:[],
+      isConfirmationMessage: false,
+      booking:[]
     }
   }
 
-// componentDidMount(){
-//   let { flights } = this.state;
-//   let api = "http://localhost:8089/api/flights";
-//   let promise = fetch(api);
-//   promise
-//     .then(response => response.json())
-//     .then(flights => {
-//       this.setState({ flights });
-//       // console.log(flights);
-//     });
-// }
+componentDidMount(){
+  let { rate } = this.state;
+  let api = "http://localhost:9999/rates";
+  let promise = fetch(api);
+  promise
+    .then(response => response.json())
+    .then(rate => {
+      this.setState({ rate });
+      // console.log(flights);
+    });
+    let { booking } = this.state;
+  fetch( "http://localhost:7777/booking")
+      .then(response => response.json())
+      .then(booking => {
+        this.setState({ booking });
+        console.log(booking);
+      });
+
+}
+
+handleConfirmBooking(passengerDetail){
+  console.log(passengerDetail);
+  let api = `http://localhost:7777/booking`;
+  fetch(api, {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(passengerDetail)
+  }).then(response => response.json()).catch(error => console.error('Error:', error))
+    .then(response =>{ alert("Thank You for Booking");
+          this.setState({isConfirmationMessage:true})
+  })
+    }
+
 
   handleSubmitFlightNumber(flightNo){
     let { flights } = this.state;
@@ -69,15 +93,20 @@ class App extends Component {
         .then(flights => {
             this.setState({ flights });
             this.setState({isShowTable:true});
-            this.setState({valuePresent:true});
             console.log(flights);
         });
   }
-  handleRate(newStars){
-    let { rate } = this.state;
-    rate = rate.concat(newStars);
-    this.setState({ rate });
-    alert("Thank you for rating!")
+  handleRate(newStars,isRefresh){
+    let api = `http://localhost:9999/rates`;
+    fetch(api, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newStars)
+    }).then(response => response.json()).catch(error => console.error('Error:', error))
+      .then(response =>  {alert("Thank you for rating!");
+                          isRefresh:true;
+      });
+      this.props.history.push("/stars");
   }
 
   render() {
@@ -87,7 +116,8 @@ class App extends Component {
 
     console.log(isTable);
     
-    let {flights,rate}=this.state;
+    let {flights,rate,booking}=this.state;
+    console.log(rate);
     
     return (
       <div className="container-fluid">
@@ -113,6 +143,9 @@ class App extends Component {
                 <li className="nav-item">
                   <Link className="nav-link" to="/rate"><i className="fa fa-comment">&nbsp;</i>Rate Us</Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/bookedFlights"><i className="fa fa-check">&nbsp;</i>View Booked Flights</Link>
+                </li>
               </ul>
             </nav>
           </div>
@@ -121,8 +154,10 @@ class App extends Component {
           <Route path="/about" component={About} />
           <Route path="/place" render={(props)=><SearchByPlace {...props} flights={flights} isTable={isTable} onSubmit={(sourceCity,destinationCity)=>this.handleSubmit(sourceCity,destinationCity)}/>}  />
           <Route path="/number" render={(props)=><SearchByNumber {...props} flights={flights} isDisplayTable={isDisplayTable} onSubmit={(flightNo)=>this.handleSubmitFlightNumber(flightNo)}/>}/>
-          <Route path="/rate"  render={(props)=><Rate {...props} rate={rate} onRate={(newStars)=>{this.handleRate(newStars)}}/>} />
-         <Route path="/book/:flightNo" render={(props)=><Book {...props} flights={flights}/>}/>
+          <Route path="/rate"  render={(props)=><Rate {...props} rate={rate} onRate={(newStars,isRefresh)=>{this.handleRate(newStars,isRefresh)}}/>} />
+         <Route path="/book/:flightNo" render={(props)=><BookFlight {...props} flights={flights} onConfirmBook={(passengerDetail)=>this.handleConfirmBooking(passengerDetail)}/>}/>
+          <Route path="/stars" render={(props)=><Stars {...props} rate={rate}/>}/>
+          <Route path="/bookedFlights" render={(props)=><ViewBookedFlights booking={booking}/>}/>
           </div>
 
         </div>

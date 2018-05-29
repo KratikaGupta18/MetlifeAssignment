@@ -36,6 +36,7 @@ class SearchByPlace extends Component {
 
     renderTable() {
         let { flights } = this.props;
+        console.log(flights.length);
         if(flights.length!==0){
         return (
             <div>

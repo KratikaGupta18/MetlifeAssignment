@@ -9,24 +9,38 @@ class Stars extends Component {
         }
         return stars;
     }
-    render() {
-        let {rate}=this.props;
-        console.log(rate.stars)
-        return (
-
-            <div>
-                <div className="row">
-                    <div className="col-8 col-sm-10 col-md-10">
-                        <div className="alert alert-info">
-                            <span>{this.renderStars(rate.stars)}</span>
-                            <br/>
-                            <span>-{rate.name}</span>
+    display() {
+        let { rate } = this.props;
+        console.log(rate);
+        return rate.map((rating) => {
+            return (
+                <div >
+                    <div className="row">
+                        <div className="col-8 col-sm-10 col-md-10">
+                            <div className="alert alert-info">
+                                <span>
+                                    {this.renderStars(rating.stars)}
+                                </span>
+                                <br />
+                                <span>-{rating.name}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-                );
-            }
-        }
-        
+            )
+        })
+    }
+    render() {
+
+        return (
+            <div>
+
+
+                {this.display()}
+            </div>
+
+        );
+    }
+}
+
 export default Stars;

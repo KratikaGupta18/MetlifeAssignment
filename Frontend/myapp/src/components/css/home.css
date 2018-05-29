@@ -1,5 +1,5 @@
 .jumbotron{
-    background-image: url("2.jpg") ;
+    background-image: url("../images/2.jpg") ;
     background-repeat: no-repeat;
     background-size: cover;
     animation: animmate 3s reverse;

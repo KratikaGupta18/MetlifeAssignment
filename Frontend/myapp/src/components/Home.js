@@ -1,5 +1,5 @@
 
-import './home.css';
+import './css/home.css';
 import React, { Component } from 'react';
 
 export default () => (

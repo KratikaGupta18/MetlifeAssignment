@@ -1,33 +1,65 @@
 import React, { Component } from 'react';
 
-class Book extends Component {
+
+class BookFlight extends Component {
 
     constructor(props) {
         super();
         this.state = {
             // flight: {},
-            isConfirmationMessage: false
+            isConfirmationMessage: false,
+            name: '',
+            age: '',
+            flightNo:'',
+            bookingId:''
         }
     }
 
+    handleChange(e) {
+        let field = e.target.id;
+        let value = e.target.value;
 
+        this.setState({ [field]: value })
+
+    }
     displayConfirmationMessage() {
+        let {name,bookingId}=this.state;
         return (
             <div>
                 <div className="alert alert-success">
                     <strong>Success!</strong>
                     <hr />
-                    <h2> Thank You for Booking With Us!</h2>
+                    <h3>Your flight was successfully booked {name}</h3>
+                    <h2>Your Booking Id is: &nbsp; {bookingId}</h2>
+                    <br/>
+                    <br/>
+                    <h3> Thank You for Booking With Us!</h3>
                     <br />
                     <h3> Have a great Flight!</h3>
                 </div>
             </div>
         )
     }
-    confirmHandler() {
+
+    submitFunction(e){
+        let { flightNo } = this.props.match.params;
+        let bookingId=Math.floor((Math.random() * 100000) + 100);
+        this.setState({bookingId})
+        console.log(bookingId);
+        e.preventDefault();
         let { isConfirmationMessage } = this.state;
-        this.setState({ isConfirmationMessage: true })
+        this.setState({ isConfirmationMessage: true });
+        let passengerDetail={
+            name:this.state.name,
+            age:this.state.age,
+            flightNo:flightNo,
+            bookingId:bookingId,
+        }
+        console.log(bookingId);
+       console.log(passengerDetail);
+       this.props.onConfirmBook(passengerDetail);
     }
+    
 
     render() {
         let flight = {};
@@ -92,14 +124,31 @@ class Book extends Component {
                                     <th scope="col">Fare</th>
                                     <td>&#8377;{flight.fare}</td>
                                 </tr>
+
                                 <tr>
-                                    <td><button className="btn btn-danger" onClick={() => { this.confirmHandler() }}>Confirm</button></td>
-                                </tr>
+                                    <form onSubmit={(e) => { this.submitFunction(e) }}>
+                                        <div className="form-group">
+                                            <label>&nbsp;&nbsp;&nbsp;Full Name</label>
+                                            <input type="text" className="form-control" id="name" onChange={(e) => { this.handleChange(e) }} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>&nbsp;&nbsp;&nbsp;Age</label>
+                                            <input type="number" className="form-control" id="age" onChange={(e) => { this.handleChange(e) }} />
+                                        </div>
+                                        <div className="help-block">
+                                    {(this.state.age > 70||this.state.age<18) ? 'Age should be between 18-70':''}
+                                </div>
+                                        <div className="form-group">
+                                            <button className="btn btn-danger"disabled={this.state.age > 70||this.state.age<18}><i class="fa fa-search">&nbsp;</i>Confirm</button>
+                                        </div>
+                       
+                                </form>
+                               </tr>
+
+                                
                             </tbody>
                         </table>
                     </div>
-
-
                 </div>
             )
         } else {
@@ -112,4 +161,4 @@ class Book extends Component {
     }
 }
 
-export default Book;
+export default BookFlight;
